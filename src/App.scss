@@ -1,0 +1,130 @@
+$blue: #6151c4;
+$white: #ffffff;
+$black: #383838;
+$grey: #e2e2e2;
+$dark-blue: #301a80;
+
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins";
+  -ms-overflow-style: none;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+.container {
+  margin: 0px;
+  min-height: 100vh;
+  background-color: $grey;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 8px !important;
+
+  &_center {
+    justify-content: center;
+  }
+  &_space {
+    justify-content: space-between;
+  }
+}
+
+header {
+  position: fixed;
+  width: 100vw;
+  height: 80px;
+  z-index: 99;
+  background-color: $white;
+  color: $black;
+  font-weight: 900;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  .nav {
+    font-size: 18px;
+    .title,
+    .menu {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      height: 70px;
+      padding: 0px 10px;
+    }
+  }
+}
+
+.pages {
+  position: absolute;
+  padding-top: 120px;
+  background-color: $white;
+  .result {
+    width: 100vw;
+    min-height: 50vh;
+    margin-bottom: 40px;
+    margin-top: 0px;
+  }
+  .search {
+    background-color: $grey;
+    padding-top: 40px;
+    border-radius: 20px 20px 0 0;
+    .bar {
+      input {
+        border-radius: 8px 0px 0px 8px;
+        border: 1px solid $white;
+        padding: 8px;
+        height: 40px;
+      }
+      .images {
+        background-color: $blue;
+        width: 40px;
+        height: 40px;
+        border-radius: 0 8px 8px 0;
+        img {
+          width: 20px;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+.weather {
+  &_icon {
+    img {
+      width: 130px;
+    }
+  }
+  &_city {
+    font-size: 14px;
+    font-weight: 200;
+  }
+  &_temp {
+    font-size: 60px;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+  &_desc {
+    font-size: 14px;
+    font-weight: 100;
+  }
+}
+
+.ui {
+  &_card {
+    background-color: $blue;
+    border-radius: 10px;
+    width: 200px;
+    min-height: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: $white;
+  }
+}
