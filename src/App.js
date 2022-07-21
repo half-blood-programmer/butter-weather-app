@@ -74,7 +74,7 @@ const App = () => {
                 onMouseLeave={handleLeave}
                 onKeyPress={handleSearch}
               />
-              <div className="images row row_center">
+              <div className="images row row_center" onClick={handleSearch}>
                 <img src={barIcon}></img>
               </div>
             </div>
