@@ -2,6 +2,7 @@ $blue: #6151c4;
 $white: #ffffff;
 $black: #383838;
 $grey: #e2e2e2;
+$dark-grey: #e2e2e25d;
 $dark-blue: #301a80;
 
 @import url("https://fonts.googleapis.com/css?family=Poppins");
@@ -36,14 +37,20 @@ $dark-blue: #301a80;
   }
 }
 
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
 header {
   position: fixed;
   width: 100vw;
   height: 80px;
   z-index: 99;
-  background-color: $white;
-  color: $black;
+  background-color: $blue;
+  color: $white;
   font-weight: 900;
+  padding-top: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   .nav {
     font-size: 18px;
@@ -52,8 +59,21 @@ header {
       display: flex;
       align-items: center;
       width: fit-content;
-      height: 70px;
+      height: 50px;
       padding: 0px 10px;
+    }
+    .menu {
+      border-radius: 100%;
+      background-color: $dark-grey;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      margin-right: 10px;
+      padding-left: 5px;
+      img {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }
@@ -126,5 +146,123 @@ header {
     justify-content: center;
     text-align: center;
     color: $white;
+  }
+  &_modal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+
+    background-color: rgba(14, 7, 7, 0.514);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    &.enter-done {
+      opacity: 1;
+      pointer-events: visible;
+    }
+    &_modal.exit {
+      opacity: 0;
+    }
+    &.modal.enter-done,
+    &_modal-content {
+      transform: translateY(0);
+    }
+
+    &.modal.exit,
+    &_modal-content {
+      transform: translateY(0);
+    }
+
+    &_modal-content {
+      margin: 80px 20px 0px 20px !important;
+
+      max-width: 500px !important;
+
+      background-color: $white;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      border: none;
+    }
+
+    &_modal-header {
+      padding: 10px;
+      height: auto;
+
+      background-color: $blue;
+      color: $white;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: nowrap;
+      flex-direction: row;
+    }
+
+    &_modal-footer {
+      background-color: $blue;
+      padding: 10px;
+    }
+
+    &_modal-footer a {
+      text-decoration: none;
+      color: var(--text-color);
+      background-color: $dark-blue;
+      padding: 8px 0px 8px 12px;
+      border-radius: 8px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &_modal-footer span {
+      margin: 0px 0px 0px -8px;
+      padding: 0px;
+    }
+
+    &_modal-title {
+      margin: 0 10px 0 0 !important;
+      max-width: 80% !important;
+      max-height: 80px;
+      flex-wrap: wrap;
+    }
+
+    &_modal-body {
+      padding: 0px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    &_modal-body img {
+      width: 100%;
+    }
+  }
+  &_button-close {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
+    &::before,
+    &::after {
+      position: absolute;
+      content: " ";
+      height: 24px;
+      width: 2px;
+      background-color: $dark-blue;
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
   }
 }
