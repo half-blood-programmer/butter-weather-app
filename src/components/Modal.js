@@ -34,17 +34,19 @@ const Modal = (props) => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="ui_modal_modal-header ">
-            <div className="ui_modal_modal-title ">{props.modalTitle}</div>
+            <div className="ui_modal_modal-title "></div>
             <div
               className="ui_modal_button-close"
               onClick={props.onClose}
             ></div>
           </div>
           <div className="ui_modal_modal-body ">
-            blah
+            <h3>{props.modalTitle}</h3>
+            <br></br>
+            <p>{props.modalBody}</p>
             {/* <img src={PosterContoh} alt={props.modalBody}></img> */}
           </div>
-          <div className="ui_modal_modal-footer ">
+          {/* <div className="ui_modal_modal-footer ">
             <a
               href={props.modalLink}
               className="button-next"
@@ -52,9 +54,9 @@ const Modal = (props) => {
               rel="noreferrer"
             >
               Buka Link{" "}
-              <span className="icon-right">{/* <RightArrowIcon /> */}</span>
+              <span className="icon-right"> <RightArrowIcon /> </span>
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </CSSTransition>

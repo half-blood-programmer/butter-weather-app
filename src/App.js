@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchWeather } from "./api/fetchWeather";
 import Header from "./components/Header";
 import "./App.scss";
@@ -8,6 +8,8 @@ import iconEnter from "./assets/enter.png";
 const App = () => {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState("");
+  const [info, setInfo] = useState("Please search location first.");
+  const [error, setError] = useState(false);
   const [barIcon, setBarIcon] = useState(iconLoc);
 
   const handleChange = (e) => {
@@ -18,13 +20,19 @@ const App = () => {
   const handleLeave = (e) => {
     setBarIcon(iconLoc);
   };
-
   const handleSearch = async (e) => {
     if (e.key === "Enter") {
-      const getData = await fetchWeather(query);
-      console.log(getData);
-      setWeather(getData);
-      setQuery("");
+      try {
+        const getData = await fetchWeather(query);
+
+        console.log(getData);
+        setWeather(getData);
+        setQuery("");
+      } catch (err) {
+        setInfo("Sorry, location not found.");
+        setError(true);
+        console.log(err);
+      }
     }
   };
 
@@ -59,7 +67,7 @@ const App = () => {
                 </div>
               </div>
             ) : (
-              <div>Please search location first.</div>
+              <div style={error ? { color: "red" } : {}}>{info}</div>
             )}
           </div>
           <div className="search">

@@ -1,6 +1,6 @@
 {
-  "short_name": "Weather App",
-  "name": "Weather App PWA",
+  "short_name": "Wherever Weather",
+  "name": "Wherever Weather PWA",
   "icons": [
     {
       "src": "/images/logo.png",
@@ -11,5 +11,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#6151c4"
 }

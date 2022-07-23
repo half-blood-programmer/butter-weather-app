@@ -17,8 +17,21 @@ const Header = () => {
     setShow(true);
   }
 
+  function NewlineText(props) {
+    const text = props.text;
+    const newText = text.split("\n").map((str) => <p>{str}</p>);
+
+    return newText;
+  }
+
   const title = "This is Example of PWA APP";
-  const body = "Progressive Web APP(PWA) is";
+  const body = (
+    <NewlineText
+      text={
+        "Progressive Web APP or PWA is a type of application software delivered through the web (Wikipedia).In short, PWA can be said to be a combination of web and application. it can be downloaded and access mobile features like an app, but runs like the web. even though it's said to be an app, it doesn't need to take up a lot of memory in your space because it runs like a web.\nThis PWA are one of the most common examples of PWAs. you can add this app to your device, without having to lose a lot of memory. In addition you can also see the difference with the commons web, namely by turning off your network and refreshing this page. You'll notice that PWAs can display cached pages and display them when there's no connection, just like an app."
+      }
+    />
+  );
 
   return (
     <>
@@ -36,7 +49,7 @@ const Header = () => {
             <div
               className="menu"
               onClick={(e) => {
-                handleShowModal("Title", "Body", "Link", e);
+                handleShowModal(title, body, "Link", e);
               }}
             >
               <img src={menuIcon}></img>
