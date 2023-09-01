@@ -36,6 +36,16 @@ const App = () => {
     setBarIcon(iconEnter);
   };
 
+  const requestNotificationPermission = async () => {
+    try {
+      const permission = await Notification.requestPermission();
+      setNotificationPermission(permission);
+      // Handle the permission status
+    } catch (error) {
+      console.error("Error requesting notification permission:", error);
+    }
+  };
+
   const handleLeave = (e) => {
     setBarIcon(iconLoc);
   };
@@ -124,8 +134,10 @@ const App = () => {
             <div className="bar row row_center">
               <input
                 type="text"
+                id="input-location"
                 placeholder="Search Location..."
                 value={query}
+                onClick={() => requestNotificationPermission}
                 onChange={(e) => {
                   handleChange(e);
                 }}
