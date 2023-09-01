@@ -11,6 +11,25 @@ const App = () => {
   const [info, setInfo] = useState("Please search location first.");
   const [error, setError] = useState(false);
   const [barIcon, setBarIcon] = useState(iconLoc);
+  const [notificationPermission, setNotificationPermission] = useState(
+    Notification.permission
+  );
+
+  useEffect(() => {
+    async function requestPermission() {
+      try {
+        const permission = await Notification.requestPermission();
+        setNotificationPermission(permission);
+      } catch (error) {
+        console.error("Error requesting notification permission:", error);
+      }
+    }
+
+    // Request notification permission on component mount
+    if (notificationPermission === "default") {
+      requestPermission();
+    }
+  }, []);
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -25,9 +44,40 @@ const App = () => {
       try {
         const getData = await fetchWeather(query);
 
-        console.log(getData);
+        console.log("getData", getData);
+        console.log(notificationPermission);
         setWeather(getData);
         setQuery("");
+        if (Notification.permission == "granted") {
+          console.log("try push notif");
+          navigator.serviceWorker.getRegistration().then(function (reg) {
+            console.log("next step push notif");
+            var options = {
+              body: `Temperature: ${Math.round(getData.main.temp)}°C`,
+              icon: `https://openweathermap.org/img/wn/${getData.weather[0].icon}@2x.png`,
+              vibrate: [100, 50, 100],
+              data: {
+                dateOfArrival: Date.now(),
+                primaryKey: 1,
+              },
+              actions: [
+                {
+                  action: "explore",
+                  title: "Explore this new world",
+                  icon: "images/checkmark.png",
+                },
+                {
+                  action: "close",
+                  title: "Close notification",
+                  icon: "images/xmark.png",
+                },
+              ],
+            };
+            console.log(options);
+            console.log(reg);
+            reg.showNotification(`Weather in ${getData.name}`, options);
+          });
+        }
       } catch (err) {
         setInfo("Sorry, location not found.");
         setError(true);
